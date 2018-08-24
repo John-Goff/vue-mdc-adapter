@@ -22,6 +22,7 @@
         <slot/>
       </section>
     </div>
+    <slot name="tabs"/>
   </header>
 </template>
 
