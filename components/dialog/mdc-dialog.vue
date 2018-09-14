@@ -28,8 +28,16 @@
         <slot />
       </section>
       <footer
-        v-if="accept||cancel"
+        v-if="accept||cancel||save"
         class="mdc-dialog__footer">
+        <mdcButton
+          v-if="save"
+          ref="save"
+          :class="{'mdc-dialog__action':accent}"
+          :raised="saveRaised"
+          class="mdc-dialog__footer__button mdc-dialog__footer__button--save"
+          @click="onSave"
+        >{{ save }}</mdcButton>
         <mdcButton
           v-if="cancel"
           ref="cancel"
@@ -75,6 +83,8 @@ export default {
     acceptRaised: { type: Boolean, default: false },
     cancel: { type: String },
     cancelRaised: { type: Boolean, default: false },
+    save: { type: String },
+    saveRaised: { type: Boolean, default: false },
     accent: Boolean,
     scrollable: Boolean,
     open: Boolean
@@ -149,6 +159,9 @@ export default {
       } else {
         this.foundation.close()
       }
+    },
+    onSave() {
+      this.$emit('save')
     },
     onCancel() {
       if (this.$listeners['validateCancel']) {
