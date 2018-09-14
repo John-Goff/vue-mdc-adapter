@@ -971,6 +971,8 @@ var script = {
     acceptRaised: { type: Boolean, default: false },
     cancel: { type: String },
     cancelRaised: { type: Boolean, default: false },
+    save: { type: String },
+    saveRaised: { type: Boolean, default: false },
     accent: Boolean,
     scrollable: Boolean,
     open: Boolean
@@ -1066,6 +1068,9 @@ var script = {
         this.foundation.close();
       }
     },
+    onSave: function onSave() {
+      this.$emit('save');
+    },
     onCancel: function onCancel() {
       var _this2 = this;
 
@@ -1148,7 +1153,13 @@ var __vue_render__ = function __vue_render__() {
     staticClass: "mdc-dialog__body",
     class: _vm.bodyClasses,
     attrs: { id: "desc" + _vm.vma_uid_ }
-  }, [_vm._t("default")], 2), _vm._v(" "), _vm.accept || _vm.cancel ? _c("footer", { staticClass: "mdc-dialog__footer" }, [_vm.cancel ? _c("mdcButton", {
+  }, [_vm._t("default")], 2), _vm._v(" "), _vm.accept || _vm.cancel || _vm.save ? _c("footer", { staticClass: "mdc-dialog__footer" }, [_vm.save ? _c("mdcButton", {
+    ref: "save",
+    staticClass: "mdc-dialog__footer__button mdc-dialog__footer__button--save",
+    class: { "mdc-dialog__action": _vm.accent },
+    attrs: { raised: _vm.saveRaised },
+    on: { click: _vm.onSave }
+  }, [_vm._v(_vm._s(_vm.save))]) : _vm._e(), _vm._v(" "), _vm.cancel ? _c("mdcButton", {
     ref: "cancel",
     staticClass: "mdc-dialog__footer__button mdc-dialog__footer__button--cancel",
     class: { "mdc-dialog__action": _vm.accent },
